@@ -30,7 +30,7 @@ def registerme():
     else:
         return redirect ('/register')
     
-    if User.get_by_email(request.form):
+    if User.get(request.form):
         flash (f'The Email {request.form["email"]} is already registered, please try another one')
         return redirect ('/register')
     else:
@@ -47,7 +47,7 @@ def registerme():
 
 @app.route ('/login', methods=['POST'])
 def login():
-    user = User.get_by_email(request.form)
+    user = User.get(request.form)
     
     if not user:
         flash ('Invalid Email or Password')
@@ -61,7 +61,7 @@ def login():
     session['first_name'] = user.first_name
     session['last_name'] = user.last_name
     session['email'] = user.email
-    return redirect('/dashboard')
+    return redirect('/panel')
 
 @app.route ('/user/account')
 @login_required
@@ -76,7 +76,7 @@ def user_update():
     validated = False
     if User.validate_data(request.form):
         if session['email'] != request.form['email']:
-            if not User.get_by_email(request.form):
+            if not User.get(request.form):
                 validated = True
             else:
                 flash (f'The Email {request.form["email"]} is already registered, please try another one')
@@ -88,5 +88,5 @@ def user_update():
                 session['last_name'] = request.form['last_name']
                 session['email'] = request.form['email']
                 flash('Updated user account')
-                return redirect('/dashboard')
+                return redirect('/panel')
     return redirect('/user/account')
