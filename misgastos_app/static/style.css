@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0 auto;
+    width: 50vw;
+    color: whitesmoke;
+    background-color: #313131;
+    font-family: Verdana;
+    font-size: 1vw;
+}
+
+div {
+    background-color: tomato;
+    color: gold;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-register, .user-account {
+    display: flex;
+    flex-direction: row;
+}
+
+section {
+    flex:1;
+}
+
+h1, h2, h3 {
+    color: gold;
+}
+
+a {
+    color: yellowgreen;
+}
+
+main, form {
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2, h3, h4, a, p, input, label, select, textarea {
+    margin: 0.5vw;
+    padding: 0.5vw;
+}
+
+input, select, textarea {
+    border-radius: 0.5vw;
+    font-size: 1vw;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+    color: whitesmoke;
+    background-color: steelblue;
+}
+
+table, th, td {
+    border: 0.1vw solid silver;
+    border-collapse: collapse;
+    font-family: Verdana;
+    font-size: 1vw;
+    padding: 0.5vw;
+}
+
+th {
+    background-color: steelblue;
+    color: whitesmoke;
+}
+
+tr:nth-child(even) {
+    background-color: gray;
+}
+
+tr:hover {
+    background-color:seagreen;
+}
+
+pre {
+    font-family: Verdana;
+}
