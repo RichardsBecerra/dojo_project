@@ -44,7 +44,7 @@
                     <tr>
                         <td>{{ ingreso.cname }}</td>
                         <td>{{ ingreso.iname }}</td>
-                        <td>{{ ingreso.mdate }}</td>
+                        <td>{{ ingreso.mdate.strftime('%a, %d% %b %y') }}</td>
                         <td>{{ ingreso.mamount }}</td>
                         <td>{{ ingreso.tpname }}</td>
                         <td>{{ ingreso.mcomment }}</td>
@@ -71,7 +71,7 @@
                     <tr>
                         <td>{{ gasto.cname }}</td>
                         <td>{{ gasto.iname }}</td>
-                        <td>{{ gasto.mdate }}</td>
+                        <td>{{ gasto.mdate.strftime('%a, %d% %b %y') }}</td>
                         <td>{{ gasto.mamount }}</td>
                         <td>{{ gasto.tpname }}</td>
                         <td>{{ gasto.mcomment }}</td>

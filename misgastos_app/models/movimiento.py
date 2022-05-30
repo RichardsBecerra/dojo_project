@@ -18,7 +18,7 @@ class Movimiento:
         if 'subtotal' in data:
             self.subtotal = data ['subtotal']
             self.cname = data ['cname']
-        if 'mdate' and 'mamount' in data:
+        if 'mdate' in data:
             self.mdate = data ['mdate']
             self.mamount = data ['mamount']
             self.cname = data ['cname']

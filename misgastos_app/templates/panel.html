@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {{ init_charts }}
     <title>Panel MisGastos</title>
 </head>
 <body>
@@ -13,6 +14,7 @@
         <a href="/panel">Panel</a>
         <a href="/logout">Logout</a>
         <a href="/blog">Blog</a>
+        <button><a href="/iorecords">Registrar ingresos y gastos</a></button>
     </nav>
 
     <div>
@@ -47,6 +49,7 @@
         </section>
         <section>
             <h1>Distribución por categoría</h1>
+            {{ cat_chart() }}
         </section>
         <a href="/detalle">Detalle del mes</a>
         <a href="/balance">Balance del mes</a>

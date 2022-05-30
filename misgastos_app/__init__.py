@@ -3,4 +3,4 @@ from flask_charts import GoogleCharts
 
 app = Flask(__name__)
 charts = GoogleCharts(app)
-app.secret_key = 'fullstackjpython'
+app.secret_key = 'fullstackpython'

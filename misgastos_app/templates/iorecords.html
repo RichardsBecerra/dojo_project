@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Registro de ingresos y egresos</title>
+</head>
+<body>
+    
+    <nav>
+        <a href="/panel">Panel</a>
+        <a href="/logout">Logout</a>
+        <a href="/blog">Blog</a>
+    </nav>
+
+    <div>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    
+    <section>
+        <h1>Registro en MisGastos.cl</h1>
+        <form method="post">
+            {{ ioform.csrf_token }}
+            {{ ioform.mio }}
+            {{ ioform.mov_cid }}
+            {{ ioform.mov_iid }}
+            {{ ioform.mdate }}
+            {{ ioform.mamount }}
+            {{ ioform.mov_tpid }}
+            {{ ioform.mcomment }}
+            <input type="submit">
+        </form>
+    </section>
+<script>
+    cat_select = document.getElementById('mov_cid');
+    itm_select = document.getElementById('mov_iid');
+
+    cat_select.onchange = function() {
+        cat = cat_select.value;
+
+        fetch ('/item/' + cat).then(function(response) {
+
+            response.json().then(function(data) {
+                optionHTML = '';
+
+                for (item of data.items) {
+                    optionHTML += '<option value="' + item.iid + '">' + item.iname + '</option>';
+                }
+                itm_select.innerHTML = optionHTML;
+            });
+        });
+    }
+</script>
+</body>
+</html>
