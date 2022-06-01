@@ -29,32 +29,72 @@
         <h1>Registro en MisGastos.cl</h1>
         <form method="post">
             {{ ioform.csrf_token }}
+            {{ ioform.mio.label }}
             {{ ioform.mio }}
+            {% for error in ioform.mio.errors %}
+            {{ error }}
+            {% endfor %}
+            {{ ioform.mov_cid.label }}
             {{ ioform.mov_cid }}
+            {% for error in ioform.mov_cid.errors %}
+            {{ error }}
+            {% endfor %}
+            {{ ioform.mov_iid.label }}
             {{ ioform.mov_iid }}
+            {% for error in ioform.mov_iid.errors %}
+            {{ error }}
+            {% endfor %}
+            {{ ioform.mdate.label }}
             {{ ioform.mdate }}
+            {% for error in ioform.mdate.errors %}
+            {{ error }}
+            {% endfor %}
+            {{ ioform.mamount.label }}
             {{ ioform.mamount }}
+            {% for error in ioform.mamount.errors %}
+            {{ error }}
+            {% endfor %}
+            {{ ioform.mov_tpid.label }}
             {{ ioform.mov_tpid }}
+            {% for error in ioform.mov_tpid.errors %}
+            {{ error }}
+            {% endfor %}
+            {{ ioform.mcomment.label }}
             {{ ioform.mcomment }}
+            {% for error in ioform.mcomment.errors %}
+            {{ error }}
+            {% endfor %}
             <input type="submit">
         </form>
     </section>
 <script>
-    cat_select = document.getElementById('mov_cid');
-    itm_select = document.getElementById('mov_iid');
-
-    cat_select.onchange = function() {
-        cat = cat_select.value;
-
-        fetch ('/item/' + cat).then(function(response) {
-
+    let mio_select = document.getElementById('mio');
+    let cat_select = document.getElementById('mov_cid');
+    let itm_select = document.getElementById('mov_iid');
+    
+    mio_select.onchange = function() {
+        let mio = mio_select.value;
+        fetch ('/cat/' + mio).then(function(response) {
             response.json().then(function(data) {
-                optionHTML = '';
-
-                for (item of data.items) {
-                    optionHTML += '<option value="' + item.iid + '">' + item.iname + '</option>';
+                let i = 0;
+                for (cat of data.cats) {
+                    cat_select.options[i] = new Option (cat.cname, cat.cid);
+                    i++
                 }
-                itm_select.innerHTML = optionHTML;
+                cat_select.onchange();
+            });
+        });
+    }
+    cat_select.onchange = function() {
+        let mio = mio_select.value;
+        let cat = cat_select.value;
+        fetch ('/item/' + mio + '/' + cat).then(function(response) {
+            response.json().then(function(data) {
+                let options = '';
+                for (item of data.items) {
+                    options += '<option value="' + item.iid + '">' + item.iname + '</option>';
+                }
+                itm_select.innerHTML = options;
             });
         });
     }

@@ -21,8 +21,8 @@ class Item:
         pass
 
     @classmethod
-    def get_by_cid_uid(cls, data):
-        query = 'select * from items where itm_cid = %(cid)s and itm_uid = %(uid)s;'
+    def get_all_by_iio_cid_uid(cls, data):
+        query = 'select * from items where iio = %(iio)s and itm_cid = %(cid)s and itm_uid = %(uid)s;'
         return Item.results(query, data)
 
     @classmethod

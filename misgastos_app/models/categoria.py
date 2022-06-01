@@ -13,9 +13,9 @@ class Categoria:
         pass
 
     @classmethod
-    def get_all(cls):
-        query = 'select * from categorias order by cname;'
-        results = connectToMySQL('dojo_project').query_db(query)
+    def get_all_by_cio(cls, data):
+        query = 'select * from categorias where cio = %(cio)s order by cname;'
+        results = connectToMySQL('dojo_project').query_db(query, data)
         categorias = []
         for row in results:
             categorias.append(cls(row))

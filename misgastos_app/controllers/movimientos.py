@@ -25,4 +25,10 @@ def detalle():
     gastos = Movimiento.get_by_uid_this_month(data)
     data['mio'] = 1
     ingresos = Movimiento.get_by_uid_this_month(data)
-    return render_template ('detalle.html', gastos = gastos, ingresos = ingresos)
+    total = {'gastos': 0, 'ingresos': 0, 'saldo': 0}
+    for gasto in gastos:
+        total['gastos'] +=  gasto.mamount
+    for ingreso in ingresos:
+        total['ingresos'] += ingreso.mamount
+    total['saldo'] = total['ingresos'] - total['gastos']
+    return render_template ('detalle.html', gastos = gastos, ingresos = ingresos, total = total)

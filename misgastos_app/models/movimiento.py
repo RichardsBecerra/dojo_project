@@ -43,3 +43,8 @@ class Movimiento:
         for row in results:
             totals.append(cls(row))
         return totals
+
+    @classmethod
+    def save(cls, data):
+        query = 'insert into movimientos (mio, mdate, mamount, mcomment, mov_uid, mov_cid, mov_iid, mov_tpid, created_at, updated_at) values (%(mio)s, %(mdate)s, %(mamount)s, %(mcomment)s, %(mov_uid)s, %(mov_cid)s, %(mov_iid)s, %(mov_tpid)s, now(), now());'
+        return connectToMySQL('dojo_project').query_db(query, data)
