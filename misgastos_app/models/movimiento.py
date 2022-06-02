@@ -3,7 +3,7 @@ from flask import flash
 
 class Movimiento:
     def __init__ (self, data):
-        if 'mid' in data:
+        if 'mio' in data:
             self.mid = data ['mid']
             self.mio = data ['mio']
             self.mdate = data ['mdate']
@@ -18,7 +18,8 @@ class Movimiento:
         if 'subtotal' in data:
             self.subtotal = data ['subtotal']
             self.cname = data ['cname']
-        if 'mdate' in data:
+        if 'mid' in data:
+            self.mid = data ['mid']
             self.mdate = data ['mdate']
             self.mamount = data ['mamount']
             self.cname = data ['cname']
@@ -28,7 +29,7 @@ class Movimiento:
 
     @classmethod
     def get_by_uid_this_month(cls, data):
-        query = 'select mdate, mamount, cname, iname, tpname, mcomment from movimientos join categorias on mov_cid = cid join items on mov_iid = iid join tipopagos on mov_tpid = tpid where mio = %(mio)s and mov_uid = %(uid)s and mdate between subdate(curdate(), day(curdate())-1) and curdate() order by mdate desc;'
+        query = 'select mid, mdate, mamount, cname, iname, tpname, mcomment from movimientos join categorias on mov_cid = cid join items on mov_iid = iid join tipopagos on mov_tpid = tpid where mio = %(mio)s and mov_uid = %(uid)s and mdate between subdate(curdate(), day(curdate())-1) and curdate() order by mdate desc;'
         results = connectToMySQL('dojo_project').query_db(query, data)
         movimientos = []
         for row in results:
@@ -48,3 +49,12 @@ class Movimiento:
     def save(cls, data):
         query = 'insert into movimientos (mio, mdate, mamount, mcomment, mov_uid, mov_cid, mov_iid, mov_tpid, created_at, updated_at) values (%(mio)s, %(mdate)s, %(mamount)s, %(mcomment)s, %(mov_uid)s, %(mov_cid)s, %(mov_iid)s, %(mov_tpid)s, now(), now());'
         return connectToMySQL('dojo_project').query_db(query, data)
+
+    @classmethod
+    def delete(cls, data):
+        query = 'delete from movimientos where mid = %(mid)s and mov_uid = %(uid)s;'
+        return connectToMySQL('dojo_project').query_db(query, data)
+    
+    @classmethod
+    def edit(cls, data):
+        pass

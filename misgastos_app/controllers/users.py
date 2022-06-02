@@ -1,5 +1,6 @@
 from misgastos_app import app
 from functools import wraps
+from misgastos_app.models.item import Item
 from misgastos_app.models.user import User
 from flask import render_template, redirect, request, session, flash
 from flask_bcrypt import Bcrypt
@@ -42,6 +43,8 @@ def registerme():
             'password': hash,
         }
         User.save(new_user)
+        new_user = User.get(new_user)
+        Item.new_user(new_user)
         flash ('Register is done, now please login')
         return redirect ('/')
 
@@ -62,6 +65,12 @@ def login():
     session['last_name'] = user.last_name
     session['email'] = user.email
     return redirect('/panel')
+
+@app.route ('/logout')
+@login_required
+def logout():
+    session.clear()
+    return redirect ('/')
 
 @app.route ('/user/account')
 @login_required

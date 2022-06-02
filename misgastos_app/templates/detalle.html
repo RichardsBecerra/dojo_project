@@ -37,6 +37,7 @@
                         <th>Monto</th>
                         <th>Tipo</th>
                         <th>Comentario</th>
+                        <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,6 +49,10 @@
                         <td>{{ ingreso.mamount }}</td>
                         <td>{{ ingreso.tpname }}</td>
                         <td>{{ ingreso.mcomment }}</td>
+                        <td>
+                            <a href="/mov_edit/{{ingreso.mid}}">Editar</a>
+                            <a href="/mov_delete/{{ingreso.mid}}">Eliminar</a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -64,6 +69,7 @@
                         <th>Monto</th>
                         <th>Tipo</th>
                         <th>Comentario</th>
+                        <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,6 +81,10 @@
                         <td>{{ gasto.mamount }}</td>
                         <td>{{ gasto.tpname }}</td>
                         <td>{{ gasto.mcomment }}</td>
+                        <td>
+                            <a href="/mov_edit/{{gasto.mid}}">Editar</a>
+                            <a href="/mov_delete/{{gasto.mid}}">Eliminar</a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

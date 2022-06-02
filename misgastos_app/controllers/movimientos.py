@@ -14,8 +14,11 @@ def panel():
     cat_chart = Chart("PieChart", "cat_chart", options= {'is3D':True, 'legend':'labeled', 'backgroundColor':'whitesmoke', 'fontName':'verdana'})
     cat_chart.data.add_column("string", "Categoría")
     cat_chart.data.add_column("number", "Gasto")
-    for cat in totals:
-        cat_chart.data.add_row([f"{cat.cname}", int(cat.subtotal)])
+    if not totals:
+        cat_chart.data.add_row(["Sin registro de gastos", 1])
+    else:
+        for cat in totals:
+            cat_chart.data.add_row([f"{cat.cname}", int(cat.subtotal)])
     return render_template ('panel.html', totals = totals, cat_chart = cat_chart)
 
 @app.route ('/detalle')
@@ -32,3 +35,17 @@ def detalle():
         total['ingresos'] += ingreso.mamount
     total['saldo'] = total['ingresos'] - total['gastos']
     return render_template ('detalle.html', gastos = gastos, ingresos = ingresos, total = total)
+
+@app.route ('/mov_delete/<mid>')
+@login_required
+def mov_delete(mid):
+    data = {'mid': mid, 'uid': session['uid']}
+    Movimiento.delete(data)
+    flash ('Registro eliminado')
+    return redirect ('/detalle')
+
+@app.route ('/mov_edit/<mid>')
+@login_required
+def mov_edit(mid):
+    data = {'mid': mid, 'uid': session['uid']}
+    Movimiento

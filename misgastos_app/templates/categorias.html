@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Categorias</title>
+</head>
+<body>
+        
+    <nav>
+        <a href="/panel">Panel</a>
+        <a href="/logout">Logout</a>
+        <a href="/blog">Blog</a>
+    </nav>
+
+    <div>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <main>
+        <h1>Detalle de categorías</h1>
+        <h2>Categorías & Items de Gastos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Gastos</th>
+                    <th>Items</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cat in cats_gastos %}
+                <tr>
+                    <td>{{ cat.cid }}</td>
+                    <td>{{ cat.cname }}</td>
+                    <td>
+                        {% for item in items_gastos[loop.index0] %}
+                        {{ item.iname }}
+                        {% if not loop.last %}
+                        |
+                        {% endif %} 
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="/items_edit/{{cat.cio}}/{{cat.cid}}" onclick="return confirm('Confirme para editar items')">Editar</a>
+                        <a href="/items_delete/{{cat.cio}}/{{cat.cid}}" onclick="return confirm('Confirme para eliminar items')">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2>Categorías & Items de Ingresos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ingresos</th>
+                    <th>Items</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cat in cats_ingresos %}
+                <tr>
+                    <td>{{ cat.cid }}</td>
+                    <td>{{ cat.cname }}</td>
+                    <td>
+                        {% for item in items_ingresos[loop.index0] %}
+                        {{ item.iname }}
+                        {% if not loop.last %}
+                        |
+                        {% endif %} 
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="/items_edit/{{cat.cio}}/{{cat.cid}}" onclick="return confirm('Confirme para editar items')">Editar</a>
+                        <a href="/items_delete/{{cat.cio}}/{{cat.cid}}" onclick="return confirm('Confirme para eliminar items')">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
