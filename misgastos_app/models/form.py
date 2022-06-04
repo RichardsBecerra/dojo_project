@@ -3,6 +3,7 @@ from wtforms import SelectField, DateField, IntegerField, TextAreaField, HiddenF
 from wtforms.validators import InputRequired
 
 class ioForm (FlaskForm):
+    mid = HiddenField()
     mio = SelectField('Gasto o Ingreso', choices=[(0, 'Gasto'), (1, 'Ingreso')], coerce=int, validators=[InputRequired('Debe seleccionar Gasto o Ingreso')])
     mov_uid = HiddenField()
     mov_cid = SelectField('Categoria', choices=[], coerce=int, validators=[InputRequired('Debe seleccionar una Categoría')])

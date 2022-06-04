@@ -48,4 +48,5 @@ def mov_delete(mid):
 @login_required
 def mov_edit(mid):
     data = {'mid': mid, 'uid': session['uid']}
-    Movimiento
+    mov = Movimiento.get_by_mid_uid(data)
+    return redirect ('/iorecords', mov = mov)

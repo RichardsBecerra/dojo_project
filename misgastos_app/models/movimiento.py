@@ -1,9 +1,8 @@
 from misgastos_app.config.mysqlconnection import connectToMySQL
-from flask import flash
 
 class Movimiento:
     def __init__ (self, data):
-        if 'mio' in data:
+        if 'mio' in data: 
             self.mid = data ['mid']
             self.mio = data ['mio']
             self.mdate = data ['mdate']
@@ -15,10 +14,10 @@ class Movimiento:
             self.mcomment = data ['mcomment']
             self.created_at = data ['created_at']
             self.updated_at = data ['updated_at']
-        if 'subtotal' in data:
+        elif 'subtotal' in data:
             self.subtotal = data ['subtotal']
             self.cname = data ['cname']
-        if 'mid' in data:
+        elif 'mid' in data:
             self.mid = data ['mid']
             self.mdate = data ['mdate']
             self.mamount = data ['mamount']
@@ -51,10 +50,19 @@ class Movimiento:
         return connectToMySQL('dojo_project').query_db(query, data)
 
     @classmethod
+    def update(cls, data):
+        query = 'update movimientos set mio = %(mio)s, mdate = %(mdate)s, mamount = %(mamount)s, mcomment = %(mcomment)s, mov_cid = %(mov_cid)s, mov_iid = %(mov_iid)s, mov_tpid = %(mov_tpid)s, updated_at = now() where mid = %(mid)s and mov_uid = %(mov_uid)s;'
+        return connectToMySQL('dojo_project').query_db(query, data)
+
+    @classmethod
     def delete(cls, data):
         query = 'delete from movimientos where mid = %(mid)s and mov_uid = %(uid)s;'
         return connectToMySQL('dojo_project').query_db(query, data)
     
     @classmethod
-    def edit(cls, data):
-        pass
+    def get_by_mid_uid(cls, data):
+        query = 'select * from movimientos where mid = %(mid)s and mov_uid = %(uid)s;'
+        result = connectToMySQL('dojo_project').query_db(query, data)
+        if not result:
+            return False
+        return cls(result[0])

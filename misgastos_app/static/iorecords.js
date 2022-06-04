@@ -7,6 +7,7 @@ mio_select.onchange = function() {
     fetch ('/cat/' + mio).then(function(response) {
         response.json().then(function(data) {
             let i = 0;
+            cat_select.innerHTML = '';
             for (cat of data.cats) {
                 cat_select.options[i] = new Option (cat.cname, cat.cid);
                 i++

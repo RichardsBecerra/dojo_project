@@ -50,8 +50,8 @@
                         <td>{{ ingreso.tpname }}</td>
                         <td>{{ ingreso.mcomment }}</td>
                         <td>
-                            <a href="/mov_edit/{{ingreso.mid}}">Editar</a>
-                            <a href="/mov_delete/{{ingreso.mid}}">Eliminar</a>
+                            <a href="/iorecords/{{ingreso.mid}}">Editar</a>
+                            <a href="/mov_delete/{{ingreso.mid}}" onclick="return confirm('Confirme para eliminar ingreso')">Eliminar</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -82,8 +82,8 @@
                         <td>{{ gasto.tpname }}</td>
                         <td>{{ gasto.mcomment }}</td>
                         <td>
-                            <a href="/mov_edit/{{gasto.mid}}">Editar</a>
-                            <a href="/mov_delete/{{gasto.mid}}">Eliminar</a>
+                            <a href="/iorecords/{{gasto.mid}}">Editar</a>
+                            <a href="/mov_delete/{{gasto.mid}}" onclick="return confirm('Confirme para eliminar gasto')">Eliminar</a>
                         </td>
                     </tr>
                     {% endfor %}

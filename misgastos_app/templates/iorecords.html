@@ -26,8 +26,13 @@
     </div>
     
     <section>
-        <h1>Registro en MisGastos.cl</h1>
+        {% if not ioform.mid.data %}
+        <h1>Nuevo registro</h1>
         <form action="/iorecords/save" method="post">
+        {% else %}
+        <h1>Actualizando registro</h1>
+        <form action="/iorecords/save/{{ioform.mid.data}}" method="post">
+        {% endif %}
             {{ ioform.csrf_token }}
             {{ ioform.mio.label }}
             {{ ioform.mio }}
