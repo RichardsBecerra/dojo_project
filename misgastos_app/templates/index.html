@@ -1,52 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>MisGastos Web App - Dojo Solo Project</title>
-</head>
-<body>
-
-    <nav>
-        <a href="/">Home</a>
-        <a href="/register">Regístrate para ingresar</a>
-        <a href="/blog">Blog</a>
-    </nav>
-
-    <div class="flash">
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <p>{{ message }}</p>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-    </div>
-
-    <main class="login-register">
-
-        <section>
-            <h2>¿Por que usar MisGastos.cl?</h2>
-            <h3>Porque es muy simple de usar</h3>
-            <h3>Porque no conecta cuentas bancarias</h3>
-            <h3>Porque entrega balance mensual</h3>
-            <h3>Y porque es totalmente gratís ;)</h3>
-            <h3>Bienbenido a bordo!</h3>
-        </section>
-
-        <section>
-            <h1>Login</h1>
-            <form action="/login" method="post">
-                <label for="email">Email</label>
-                <input type="email" name="email" required>
-                <label for="password">Password</label>
-                <input type="password" name="password" required>
-                <input type="submit" value="Login">
-            </form>
-        </section>
-        
-    </main>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}MisGastos - Dojo Project{% endblock %}
+{% block body %}
+<nav>
+    <a href="/">MisGastos</a>
+    <a href="/register">Regístrate para ingresar</a>
+</nav>
+<div class="flash">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+<main class="login-register">
+    <section>
+        <h1>Login</h1>
+        <form action="/login" method="post">
+            <label for="email">Email</label>
+            <input type="email" name="email" required>
+            <label for="password">Password</label>
+            <input type="password" name="password" required>
+            <input type="submit" value="Login">
+        </form>
+    </section>
+    <section class="purple">
+        <h1>¿Por que usar MisGastos.cl?</h1>
+        <h3>Porque es muy simple de usar</h3>
+        <h3>Porque no conecta cuentas bancarias</h3>
+        <h3>Porque entrega balance mensual</h3>
+        <h3>Y porque es totalmente gratís ;)</h3>
+        <h3>Bienbenido a bordo!</h3>
+    </section>
+</main>
+{% endblock %}

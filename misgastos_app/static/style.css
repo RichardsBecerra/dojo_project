@@ -13,13 +13,24 @@ body {
 }
 
 div.flash {
-    background-color: tomato;
+    background-color:crimson;
     color: gold;
 }
 
 nav {
+    border: 0.15vw solid silver;
+    background-color: #6200ee;
+    border-radius: 0.5vw;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1vw;
+}
+
+nav > a {
+    color: #03dac5;
+    font-weight: bold;
+    font-size: 1.1vw;
+    text-decoration: none;
 }
 
 .login-register, .user-account {
@@ -31,22 +42,43 @@ section {
     flex:1;
 }
 
+section.purple {
+    border-radius: 0.5vw;
+    background-color:#bb86fc;
+}
+
+section.purple > * {
+    color: #313131;
+}
+
+div.char {
+    background-color: whitesmoke;
+    border-radius: 0.5vw;
+}
+
 h1, h2, h3 {
-    color: gold;
+    color: #bb86fc;
 }
 
 a {
-    color: limegreen;
+    color: #03dac5;
+    font-size: 1.1vw;
 }
 
 main, form {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 }
 
 h1, h2, h3, h4, a, p, input, label, select, textarea {
     margin: 0.5vw;
     padding: 0.5vw;
+}
+
+label {
+    color: #03dac5;
+    font-size: 1vw;
 }
 
 input, select, textarea {
@@ -57,19 +89,19 @@ input, select, textarea {
 input[type="submit"] {
     cursor: pointer;
     color: whitesmoke;
-    background-color: steelblue;
+    background-color: #6200ee;
 }
 
 table, th, td {
     border: 0.1vw solid silver;
-    border-collapse: collapse;
+    border-radius: 0.5vw;
     font-family: Verdana;
     font-size: 1vw;
     padding: 0.5vw;
 }
 
 th {
-    background-color: steelblue;
+    background-color: #6200ee;
     color: whitesmoke;
 }
 
@@ -78,7 +110,7 @@ tr:nth-child(even) {
 }
 
 tr:hover {
-    background-color:steelblue;
+    background-color:#6200ee;
 }
 
 pre {
@@ -86,10 +118,9 @@ pre {
 }
 
 .dropbtn {
-    background-color:mediumseagreen;
+    background-color: #018786;
     color: white;
     padding: 0.5vw;
-    margin-bottom: 0.25vw;
     font-size: 1vw;
     border: none;
     border-radius: 0.5vw;
