@@ -27,8 +27,16 @@ class Item:
         return connectToMySQL('dojo_project').query_db(query, data)
 
     @classmethod
+    def update(cls, data):
+        query = 'update items set iname = %(iname)s, updated_at = now() where iid = %(iid)s and itm_uid = %(itm_uid)s;'
+        return connectToMySQL('dojo_project').query_db(query, data)
+
+    @classmethod
     def delete(cls, data):
-        query = 'delete from items where iio = %(iio)s and itm_cid = %(cid)s and itm_uid = %(uid)s;'
+        if 'iid' in data:
+            query = 'delete from items where iid = %(iid)s and itm_uid = %(uid)s;'
+        else:
+            query = 'delete from items where iio = %(iio)s and itm_cid = %(cid)s and itm_uid = %(uid)s;'
         return connectToMySQL('dojo_project').query_db(query, data)
 
     @classmethod

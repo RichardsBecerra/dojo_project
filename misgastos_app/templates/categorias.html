@@ -15,7 +15,7 @@
         <a href="/blog">Blog</a>
     </nav>
 
-    <div>
+    <div class="flash">
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
@@ -30,28 +30,32 @@
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Gastos</th>
                     <th>Items</th>
-                    <th>Acción</th>
                 </tr>
             </thead>
             <tbody>
                 {% for cat in cats_gastos %}
                 <tr>
-                    <td>{{ cat.cid }}</td>
-                    <td>{{ cat.cname }}</td>
                     <td>
-                        {% for item in items_gastos[loop.index0] %}
-                        {{ item.iname }}
-                        {% if not loop.last %}
-                        |
-                        {% endif %} 
-                        {% endfor %}
+                        <div class="dropdown">
+                            <button class="dropbtn">{{ cat.cname }}</button>
+                            <div class="dropdown-content">
+                                <a href="/items_edit/{{cat.cio}}/{{cat.cid}}/{{cat.cname}}">Agregar Item</a>
+                                <a href="/items_delete/{{cat.cio}}/{{cat.cid}}" onclick="return confirm('Confirme para eliminar TODOS los items')">Eliminar todos</a>
+                            </div>
+                        </div>
                     </td>
                     <td>
-                        <a href="/items_edit/{{cat.cio}}/{{cat.cid}}" onclick="return confirm('Confirme para editar items')">Editar</a>
-                        <a href="/items_delete/{{cat.cio}}/{{cat.cid}}" onclick="return confirm('Confirme para eliminar items')">Eliminar</a>
+                        {% for item in items_gastos[loop.index0] %}
+                        <div class="dropdown">
+                            <button class="dropbtn">{{ item.iname }}</button>
+                            <div class="dropdown-content">
+                                <a href="/item_edit/{{item.iid}}/{{item.iname}}">Editar</a>
+                                <a href="/items_delete/{{item.iid}}" onclick="return confirm('Confirme para eliminar item {{ item.iname }}')">Eliminar</a>
+                            </div>
+                        </div>
+                        {% endfor %}
                     </td>
                 </tr>
                 {% endfor %}
@@ -61,28 +65,32 @@
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Ingresos</th>
                     <th>Items</th>
-                    <th>Acción</th>
                 </tr>
             </thead>
             <tbody>
                 {% for cat in cats_ingresos %}
                 <tr>
-                    <td>{{ cat.cid }}</td>
-                    <td>{{ cat.cname }}</td>
                     <td>
-                        {% for item in items_ingresos[loop.index0] %}
-                        {{ item.iname }}
-                        {% if not loop.last %}
-                        |
-                        {% endif %} 
-                        {% endfor %}
+                        <div class="dropdown">
+                            <button class="dropbtn">{{ cat.cname }}</button>
+                            <div class="dropdown-content">
+                                <a href="/items_edit/{{cat.cio}}/{{cat.cid}}/{{cat.cname}}">Agregar Item</a>
+                                <a href="/items_delete/{{cat.cio}}/{{cat.cid}}" onclick="return confirm('Confirme para eliminar TODOS los items')">Eliminar todos</a>
+                            </div>
+                        </div>
                     </td>
                     <td>
-                        <a href="/items_edit/{{cat.cio}}/{{cat.cid}}" onclick="return confirm('Confirme para editar items')">Editar</a>
-                        <a href="/items_delete/{{cat.cio}}/{{cat.cid}}" onclick="return confirm('Confirme para eliminar items')">Eliminar</a>
+                        {% for item in items_ingresos[loop.index0] %}
+                        <div class="dropdown">
+                            <button class="dropbtn">{{ item.iname }}</button>
+                            <div class="dropdown-content">
+                                <a href="/item_edit/{{item.iid}}/{{item.iname}}">Editar</a>
+                                <a href="/items_delete/{{item.iid}}" onclick="return confirm('Confirme para eliminar item {{ item.iname }}')">Eliminar</a>
+                            </div>
+                        </div>
+                        {% endfor %}
                     </td>
                 </tr>
                 {% endfor %}

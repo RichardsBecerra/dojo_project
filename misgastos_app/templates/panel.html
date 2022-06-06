@@ -17,7 +17,7 @@
         <button><a href="/iorecords">Registrar ingresos y gastos</a></button>
     </nav>
 
-    <div>
+    <div class="flash">
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
@@ -29,6 +29,27 @@
 
     <main>
         <section>
+            <h1>Ingresos por categoría</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Categoría</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cat in itotals %}
+                    <tr>
+                        <td>{{ cat.cname }}</td>
+                        <td>{{ cat.subtotal }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h1>% Ingresos por categoría</h1>
+            {{ icat_chart() }}
+        </section>
+        <section>
             <h1>Gastos por categoría</h1>
             <table>
                 <thead>
@@ -38,7 +59,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for cat in totals %}
+                    {% for cat in gtotals %}
                     <tr>
                         <td>{{ cat.cname }}</td>
                         <td>{{ cat.subtotal }}</td>
@@ -46,10 +67,8 @@
                     {% endfor %}
                 </tbody>
             </table>
-        </section>
-        <section>
-            <h1>Distribución de gastos por categoría</h1>
-            {{ cat_chart() }}
+            <h1>% Gastos por categoría</h1>
+            {{ gcat_chart() }}
         </section>
         <a href="/detalle">Balance & detalle del mes</a>
         <a href="/categorias">Detalle de categorías</a>

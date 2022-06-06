@@ -9,17 +9,34 @@ locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 @app.route ('/panel')
 @login_required
 def panel():
-    uid = {'uid': session['uid']}
-    totals = Movimiento.get_total_by_cat(uid)
-    cat_chart = Chart("PieChart", "cat_chart", options= {'is3D':True, 'legend':'labeled', 'backgroundColor':'whitesmoke', 'fontName':'verdana'})
-    cat_chart.data.add_column("string", "Categoría")
-    cat_chart.data.add_column("number", "Gasto")
-    if not totals:
-        cat_chart.data.add_row(["Sin registro de gastos", 1])
+
+    data = {'mio': 0, 'uid': session['uid']}
+    gtotals = Movimiento.get_total_by_cat(data)
+    
+    data = {'mio': 1, 'uid': session['uid']}
+    itotals = Movimiento.get_total_by_cat(data)
+
+    gcat_chart = Chart("PieChart", "gcat_chart", options= {'is3D':True, 'legend':'labeled', 'backgroundColor':'whitesmoke', 'fontName':'verdana'})
+    gcat_chart.data.add_column("string", "Categoría")
+    gcat_chart.data.add_column("number", "Gasto")
+
+    icat_chart = Chart("PieChart", "icat_chart", options= {'is3D':True, 'legend':'labeled', 'backgroundColor':'whitesmoke', 'fontName':'verdana'})
+    icat_chart.data.add_column("string", "Categoría")
+    icat_chart.data.add_column("number", "Ingreso")
+
+    if not gtotals:
+        gcat_chart.data.add_row(["Sin registro de gastos", 1])
     else:
-        for cat in totals:
-            cat_chart.data.add_row([f"{cat.cname}", int(cat.subtotal)])
-    return render_template ('panel.html', totals = totals, cat_chart = cat_chart)
+        for cat in gtotals:
+            gcat_chart.data.add_row([f"{cat.cname}", int(cat.subtotal)])
+    
+    if not itotals:
+        icat_chart.data.add_row(["Sin registro de ingresos", 1])
+    else:
+        for cat in itotals:
+            icat_chart.data.add_row([f"{cat.cname}", int(cat.subtotal)])
+
+    return render_template ('panel.html', gtotals = gtotals, gcat_chart = gcat_chart, itotals = itotals, icat_chart = icat_chart)
 
 @app.route ('/detalle')
 @login_required

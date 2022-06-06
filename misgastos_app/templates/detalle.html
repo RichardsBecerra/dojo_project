@@ -15,7 +15,7 @@
         <a href="/blog">Blog</a>
     </nav>
 
-    <div>
+    <div class="flash">
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
@@ -51,7 +51,7 @@
                         <td>{{ ingreso.mcomment }}</td>
                         <td>
                             <a href="/iorecords/{{ingreso.mid}}">Editar</a>
-                            <a href="/mov_delete/{{ingreso.mid}}" onclick="return confirm('Confirme para eliminar ingreso')">Eliminar</a>
+                            <a href="/mov_delete/{{ingreso.mid}}" onclick="return confirm('Confirme para eliminar ingreso: {{ingreso.iname}}')">Eliminar</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -83,7 +83,7 @@
                         <td>{{ gasto.mcomment }}</td>
                         <td>
                             <a href="/iorecords/{{gasto.mid}}">Editar</a>
-                            <a href="/mov_delete/{{gasto.mid}}" onclick="return confirm('Confirme para eliminar gasto')">Eliminar</a>
+                            <a href="/mov_delete/{{gasto.mid}}" onclick="return confirm('Confirme para eliminar gasto: {{gasto.iname}}')">Eliminar</a>
                         </td>
                     </tr>
                     {% endfor %}

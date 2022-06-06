@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Items por Categoría</title>
+</head>
+<body>
+        
+    <nav>
+        <a href="/panel">Panel</a>
+        <a href="/logout">Logout</a>
+        <a href="/blog">Blog</a>
+    </nav>
+
+    <div class="flash">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <main>
+        <section>
+            <h1>Items de categoría: {{ idata.cname }}</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ item.iname }}</td>
+                        <td><a href="/items_delete/{{item.iid}}" onclick="return confirm('Confirme para eliminar item {{ item.iname }}')">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <h1>Nuevo Item</h1>
+            <form action="/items_save" method="post">
+                {{ itemform.csrf_token }}
+                {{ itemform.iio(value = idata.iio) }}
+                {{ itemform.itm_cid(value = idata.cid) }}
+                {{ itemform.itm_cname(value = idata.cname) }}
+                {{ itemform.iname.label }}
+                {{ itemform.iname }}
+                {% for error in itemform.iname.errors %}
+                {{ error }}
+                {% endfor %}
+                <input type="submit">
+            </form>
+        </section>
+        <a href="/categorias">Detalle de categorías</a>
+    </main>
+</body>
+</html>

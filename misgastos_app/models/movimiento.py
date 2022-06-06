@@ -37,7 +37,7 @@ class Movimiento:
 
     @classmethod
     def get_total_by_cat(cls, data):
-        query = 'select sum(mamount) as subtotal, cname from movimientos join categorias on mov_cid = cid where mio = 0 and mov_uid = %(uid)s and mdate between subdate(curdate(), day(curdate())-1) and curdate() group by mov_cid;'
+        query = 'select sum(mamount) as subtotal, cname from movimientos join categorias on mov_cid = cid where mio = %(mio)s and mov_uid = %(uid)s and mdate between subdate(curdate(), day(curdate())-1) and curdate() group by mov_cid;'
         results = connectToMySQL('dojo_project').query_db(query, data)
         totals = []
         for row in results:

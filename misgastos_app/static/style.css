@@ -5,14 +5,14 @@
 
 body {
     margin: 0 auto;
-    width: 50vw;
+    width: 66vw;
     color: whitesmoke;
     background-color: #313131;
     font-family: Verdana;
     font-size: 1vw;
 }
 
-div {
+div.flash {
     background-color: tomato;
     color: gold;
 }
@@ -36,7 +36,7 @@ h1, h2, h3 {
 }
 
 a {
-    color: yellowgreen;
+    color: limegreen;
 }
 
 main, form {
@@ -74,13 +74,48 @@ th {
 }
 
 tr:nth-child(even) {
-    background-color: gray;
+    background-color: rgb(96, 96, 96);
 }
 
 tr:hover {
-    background-color:seagreen;
+    background-color:steelblue;
 }
 
 pre {
     font-family: Verdana;
 }
+
+.dropbtn {
+    background-color:mediumseagreen;
+    color: white;
+    padding: 0.5vw;
+    margin-bottom: 0.25vw;
+    font-size: 1vw;
+    border: none;
+    border-radius: 0.5vw;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: whitesmoke;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #313131;
+    padding: 0.5vw;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #dddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #313131;}
